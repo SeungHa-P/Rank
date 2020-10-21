@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Rank</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="adcap_content">
+        ㈜애드캡슐소프트는 1999년에 설립된 웹사이트 및 모바일 구축전문업체로 인터넷이라는 매체를 통한 다양한 서비스를 개발해 오고 있습니다.
+협동작업(Collaboration), 의사소통(Communication), 메시징(Messaging) 세가지의 조화 속에서 고객을 성공시키는 철저한 서비스관리와 기술개발을 바탕으로 향후 세계
+    </string>
+
+
+</resources>

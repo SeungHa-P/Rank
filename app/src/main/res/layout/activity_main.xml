@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="activity"
+            type="com.rank.rank.MainActivity" />
+        <variable
+            name="mvM"
+            type="com.rank.rank.MainViewModel" />
+
+    </data>
+<androidx.drawerlayout.widget.DrawerLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bodyColor"
+    tools:context=".MainActivity"
+    android:id="@+id/drwerlayout"
+    >
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/title_tool"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="#FFFFFF"
+        app:contentInsetStart="0dp"
+        app:contentInsetEnd="0dp"
+        >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="15dp"
+                >
+                    <TextView
+                        android:id="@+id/title_rank"
+                        android:layout_width="32dp"
+                        android:layout_height="25dp"
+                        android:text="랭킹"
+                        android:textSize="17dp"
+                        android:textColor="@color/selectColor"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        android:layout_marginLeft="25dp"
+                        android:textStyle="bold"
+                        android:onClick="title"
+
+                    />
+                <TextView
+                    android:id="@+id/title_project"
+                    android:layout_width="63dp"
+                    android:layout_height="25dp"
+                    android:text="프로젝트"
+                    android:textSize="17dp"
+                    android:textColor="@color/notSelectColor"
+                    app:layout_constraintLeft_toRightOf="@+id/title_rank"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginLeft="20dp"
+                    android:textStyle="bold"
+                    android:onClick="title"
+                    />
+
+                <TextView
+                    android:id="@+id/title_custom"
+                    android:layout_width="63dp"
+                    android:layout_height="25dp"
+                    android:text="제작의뢰"
+                    android:textSize="17dp"
+                    android:textColor="@color/notSelectColor"
+                    app:layout_constraintLeft_toRightOf="@+id/title_project"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginLeft="20dp"
+                    android:textStyle="bold"
+                    android:onClick="title"
+
+                    />
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginRight="19dp"
+                    android:id="@+id/search_btn"
+                    android:background="#FFFFFFFF"
+                    android:src="@drawable/search_icon"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+<androidx.viewpager.widget.ViewPager
+    android:layout_marginTop="1dp"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+
+    app:layout_constraintTop_toBottomOf="@+id/title_tool"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    android:id="@+id/viewPager"
+    />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include android:id="@+id/incdraw" layout="@layout/activity_drawer"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>
+
+</layout>
