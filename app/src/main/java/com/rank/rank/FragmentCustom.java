@@ -169,9 +169,11 @@ public class FragmentCustom extends Fragment {
                         binding.priceEdt.setSelection(formatResult.length());
 
                     }catch (NumberFormatException ex){
-                        Toast.makeText(getContext(),"액수 범위를 초과했습니다.",Toast.LENGTH_SHORT).show();
-                        formatResult="";
-                        binding.priceEdt.setText("");
+                        if(s.length()>0) {
+                            Toast.makeText(getContext(), "액수 범위를 초과했습니다.", Toast.LENGTH_SHORT).show();
+                            formatResult = "";
+                            binding.priceEdt.setText("");
+                        }
                     }
 
                 }
