@@ -41,16 +41,22 @@ public class FragmentCustom extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        try{
+
 
         if(requestCode == 1){
-                    Toast.makeText(getContext(),data.getIntExtra("yyyy",0)+"",Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getContext(),data.getIntExtra("yyyy",0)+"",Toast.LENGTH_SHORT).show();
                     binding.startDay.setText(data.getIntExtra("yyyy",0)+"."
                     +data.getIntExtra("mm",0)+"."+data.getIntExtra("dd",0));
                     binding.subConst2.setVisibility(View.VISIBLE);
         }else if (requestCode == 2){
-            Toast.makeText(getContext(),data.getIntExtra("yyyy",0)+"",Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(getContext(),data.getIntExtra("yyyy",0)+"",Toast.LENGTH_SHORT).show();
             binding.end.setText(data.getIntExtra("yyyy",0)+"."
                     +data.getIntExtra("mm",0)+"."+data.getIntExtra("dd",0));
+        }
+
+        }catch (NullPointerException ex){
+            Toast.makeText(getContext(), "값을 선택해주세요", Toast.LENGTH_SHORT).show();
         }
     }
 

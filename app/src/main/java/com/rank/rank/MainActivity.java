@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+
 import com.rank.rank.adapter.DrawerAdapter;
 import com.rank.rank.adapter.MainAdapter;
 import com.rank.rank.databinding.ActivityMainBinding;
@@ -21,10 +22,23 @@ public class MainActivity extends AppCompatActivity {
         private ActivityMainBinding binding;
         private MainViewModel mvM;
 
+        private boolean drawerFlag = false;
+
         private TextView[] title;
         private int titleposition;
         private View constraintLayout;
         private DrawerLayout drawerLayout;
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        if(drawerFlag) {
+            drawerClose();
+        }else{
+            super.onBackPressed();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +93,10 @@ public class MainActivity extends AppCompatActivity {
         binding.searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.drwerlayout.openDrawer(binding.incdraw.drawer);
+                if(!drawerFlag) {
+                    binding.drwerlayout.openDrawer(binding.incdraw.drawer);
+                    drawerFlag=true;
+                }
 
             }
         });
@@ -95,6 +112,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    public void drawerClose(){
+        if(drawerFlag){
+            binding.drwerlayout.closeDrawer(binding.incdraw.drawer);
+            drawerFlag=false;
+        }
+    }
 
 
 
