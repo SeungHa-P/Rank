@@ -212,6 +212,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/img_client02"
+            android:scaleType="fitXY"
             android:id="@+id/img_client01"/>
         <ImageView
             android:layout_width="86dp"
@@ -221,6 +222,7 @@
             app:layout_constraintLeft_toRightOf="@+id/img_client01"
             app:layout_constraintRight_toLeftOf="@id/img_client03"
             android:src="@drawable/client_02"
+            android:scaleType="fitXY"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             />
@@ -228,6 +230,7 @@
             android:layout_width="86dp"
             android:layout_height="28dp"
             app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="fitXY"
             android:id="@+id/img_client03"
             app:layout_constraintLeft_toRightOf="@id/img_client02"
             app:layout_constraintRight_toRightOf="parent"
