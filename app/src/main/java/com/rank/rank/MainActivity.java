@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
+        
 
         binding.searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
