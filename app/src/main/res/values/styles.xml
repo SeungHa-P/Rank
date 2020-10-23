@@ -14,9 +14,9 @@
 <!--        <item name="android:statusBarColor">#ffffff</item>-->
         <item name="android:windowLightStatusBar">true</item>
         <item name="actionBarSize">100dp</item>
-        <item name="android:textViewStyle">@style/nototext</item>
-        <item name="buttonStyle">@style/nototext</item>
-        <item name="editTextStyle">@style/nototext</item>
+        <item name="android:textViewStyle">@style/customTextViewFontStyle</item>
+        <item name="android:buttonStyle">@style/customButtonFontStyle</item>
+        <item name="android:editTextStyle">@style/customEditTextFontStyle</item>
 
     </style>
 
@@ -27,13 +27,22 @@
         <item name="colorAccent">@color/colorAccent</item>
         <!--        <item name="android:statusBarColor">#ffffff</item>-->
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:textViewStyle">@style/customTextViewFontStyle</item>
+        <item name="android:buttonStyle">@style/customButtonFontStyle</item>
+        <item name="android:editTextStyle">@style/customEditTextFontStyle</item>
     </style>
+
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:textViewStyle">@style/customTextViewFontStyle</item>
+        <item name="android:buttonStyle">@style/customButtonFontStyle</item>
+        <item name="android:editTextStyle">@style/customEditTextFontStyle</item>
     </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+
 
 
 

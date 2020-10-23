@@ -12,7 +12,7 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="26dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="4dp"
         android:letterSpacing="0.01"
@@ -37,7 +37,7 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="31dp"
         android:text="애드캡슐소프트"
@@ -72,7 +72,7 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="15dp"
+        android:layout_height="wrap_content"
         android:text="#웹 에이전시"
         android:textSize="11dp"
         android:id="@+id/hash_1"
@@ -86,7 +86,7 @@
         />
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="15dp"
+        android:layout_height="wrap_content"
         android:text="#웹 에이전시"
         android:textSize="11dp"
         android:id="@+id/hash_2"
@@ -101,7 +101,7 @@
         />
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="15dp"
+        android:layout_height="wrap_content"
         android:text="#웹 에이전시"
         android:textSize="11dp"
         android:id="@+id/hash_3"
@@ -116,7 +116,7 @@
         />
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="15dp"
+        android:layout_height="wrap_content"
         android:text="#웹 에이전시"
         android:textSize="11dp"
         android:id="@+id/hash_4"
@@ -130,7 +130,7 @@
         />
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="15dp"
+        android:layout_height="wrap_content"
         android:text="#웹 에이전시"
         android:textSize="11dp"
         android:id="@+id/hash_5"
