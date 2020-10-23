@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingRight="12dp"
+
+    android:paddingBottom="11dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="17dp"
+        android:textSize="11dp"
+        android:textColor="#50000000"
+
+        android:text="2019.11.01 기준"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="29dp"
+        android:id="@+id/text_new"
+
+
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

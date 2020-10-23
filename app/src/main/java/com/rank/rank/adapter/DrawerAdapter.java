@@ -82,6 +82,8 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
               intent = new Intent(v.getContext(),DetailActivity.class);
                 v.getContext().startActivity(intent);
 
+
+
             }
         });
         holder.alphaBtn.setOnClickListener(new View.OnClickListener() {

@@ -1,5 +1,11 @@
 package com.rank.rank.adapter;
 
+import android.content.Context;
+import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,42 +13,123 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.load.resource.bitmap.BitmapDrawableResource;
+import com.bumptech.glide.load.resource.bitmap.CenterInside;
+import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.Request;
+import com.bumptech.glide.request.RequestOptions;
 import com.rank.rank.R;
+import com.rank.rank.RankSingleTon;
+import com.rank.rank.model.ProjectModel;
 
-public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHolder> {
+public class ProjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private String imgUrl = "https://ssongh.cafe24.com/Agency";
+
+    public Context context;
+    private ProjectModel projectModel = RankSingleTon.getInstance().getProjectModels();
+    public ProjectAdapter(Context context){
+        this.context=context;
+
+    }
 
 
-
-    private int[] project_Img={R.drawable.project_01,R.drawable.project_02,R.drawable.project_03,R.drawable.project_04,R.drawable.project_05,
-            R.drawable.project_06,R.drawable.project_07,R.drawable.project_08};
-
-    private String[] project_Name = {"롯데리조트","현대캐피탈","롯데월드타워","현대카드 블로그","GS SHOP","레이토 코리아","대림성모병원","삼성금 Open Coll..."};
-    private String[] project_Day = {"19.10.01","19.09.28","19.09.25","19.08.10","19.08.05","19.07.25","19.08.05","19.07.25"};
 
     @NonNull
     @Override
-    public ProjectAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-
+        RecyclerView.ViewHolder viewHolder;
+        if(viewType == 0) {
+            view= LayoutInflater.from(parent.getContext()).inflate(R.layout.project_list_header,parent,false);
+            viewHolder = new HeaderViewHolder(view);
+        }else if (viewType ==1){
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.project_grid_item, parent, false);
-
-        return new ViewHolder(view);
+            viewHolder = new ViewHolder(view);
+        }else{
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.project_grid_item, parent, false);
+            viewHolder = new ViewHolder(view);
+        }
+        return viewHolder;
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.project_img_view.setImageResource(project_Img[position]);
-        holder.project_name_text.setText(project_Name[position]);
-        holder.project_day_text.setText(project_Day[position]);
+    public int getItemViewType(int position) {
+        if(position == 0){
+            return 0;
+        }else{
+
+            return 1;
+        }
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof HeaderViewHolder){
+            final HeaderViewHolder headerViewHolder = (HeaderViewHolder) holder;
+            String headText = headerViewHolder.projectcount.getText().toString();
+            SpannableString spannableString = new SpannableString(headText);
+            String first = "총 ";
+            String last = "개의 프로젝트";
+
+            int start = headText.indexOf(first)+1;
+            int end = headText.length() - headText.indexOf(last)-1;
+
+            spannableString.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            headerViewHolder.projectcount.setText(spannableString);
+
+
+
+        }
+        if(holder instanceof ViewHolder) {
+            final ViewHolder viewHolder = (ViewHolder) holder;
+            Glide.with(context)
+                    .load(imgUrl+projectModel.getProject().get(position-1).getProjectImg())
+                    .apply(new RequestOptions().transform(new CenterInside(),new GranularRoundedCorners((int)(3*RankSingleTon.getInstance().getDensity()),(int)(3*RankSingleTon.getInstance().getDensity()),0,0)))
+//                    .apply(new RequestOptions().transform(new RoundedCorners((int)(3*RankSingleTon.getInstance().getDensity())))) //전체 코
+                    .placeholder(R.drawable.logo_placeholder)
+                    .into(viewHolder.project_img_view);
+
+            viewHolder.project_name_text.setText(projectModel.getProject().get(position -1).getProjectName());
+//            int companyCd = projectModel.getProject().get(position-1).getCompanyCd();
+//            for(int i=0;i<RankSingleTon.getInstance().getMainModel().getData().size();i++){
+//                if(RankSingleTon.getInstance().getMainModel().getData().get(i).getCompanyCd() == companyCd){
+//                    viewHolder.project_name_text.setText(RankSingleTon.getInstance().getMainModel().getData().get(i).getCompanyName());
+//                    break;
+//               }else{
+//                    continue;
+//                }
+//            }
+            viewHolder.project_day_text.setText(RankSingleTon.getInstance().getProjectModels().getProject().get(position-1).getDate());
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return project_Name.length;
+        return projectModel.getProject().size() + 1;
     }
+
+    class HeaderViewHolder extends RecyclerView.ViewHolder{
+        public TextView projectcount;
+        HeaderViewHolder(View view){
+            super(view);
+
+            projectcount = view.findViewById(R.id.project_count_txt);
+
+
+
+        }
+
+    }
+
 
 
     class ViewHolder extends RecyclerView.ViewHolder{

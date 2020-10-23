@@ -1,16 +1,13 @@
 package com.rank.rank.adapter;
 
-import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.rank.rank.FragmentCustom;
-import com.rank.rank.FragmentProject;
-import com.rank.rank.FragmentRank;
+import com.rank.rank.fragment.FragmentCustom;
+import com.rank.rank.fragment.FragmentProject;
+import com.rank.rank.fragment.FragmentRank;
 
 public class MainAdapter extends FragmentPagerAdapter {
 

@@ -14,6 +14,9 @@
 <!--        <item name="android:statusBarColor">#ffffff</item>-->
         <item name="android:windowLightStatusBar">true</item>
         <item name="actionBarSize">100dp</item>
+        <item name="android:textViewStyle">@style/nototext</item>
+        <item name="buttonStyle">@style/nototext</item>
+        <item name="editTextStyle">@style/nototext</item>
 
     </style>
 
@@ -55,5 +58,24 @@
         <item name="android:textStyle">normal</item>
         <item name="android:lineSpacingExtra">3dp</item>
     </style>
+
+
+
+
+
+
+    <style name="customTextViewFontStyle" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/app_main_font</item>
+    </style>
+
+    <style name="customButtonFontStyle" parent="@android:style/Widget.DeviceDefault.Button.Borderless">
+        <item name="android:fontFamily">@font/app_main_font</item>
+    </style>
+
+    <style name="customEditTextFontStyle" parent="@android:style/Widget.DeviceDefault.EditText">
+        <item name="android:fontFamily">@font/app_main_font</item>
+    </style>
+
+
 
 </resources>

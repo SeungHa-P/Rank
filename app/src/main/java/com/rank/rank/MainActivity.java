@@ -1,5 +1,6 @@
 package com.rank.rank;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.rank.rank.adapter.DrawerAdapter;
@@ -42,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Toast.makeText(this,"프로젝트 데이터 갯수"+RankSingleTon.getInstance().getProjectModels().getProject().size()
+                +"\n메인 데이터 갯수"+RankSingleTon.getInstance().getMainModel().getData().size(),Toast.LENGTH_SHORT).show();
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
@@ -100,7 +105,27 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        binding.drwerlayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
 
+            }
+
+            @Override
+            public void onDrawerOpened(@NonNull View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {
+                drawerFlag=false;
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
 
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -114,10 +139,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void drawerClose(){
-        if(drawerFlag){
+
             binding.drwerlayout.closeDrawer(binding.incdraw.drawer);
             drawerFlag=false;
-        }
+
     }
 
 

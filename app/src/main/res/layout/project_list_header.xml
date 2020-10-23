@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="1dp"
+
+    android:background="#FFFFFF">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:id="@+id/top_const"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginLeft="25dp"
+
+        android:id="@+id/project_count_txt"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="총 1000개의 프로젝트"
+        android:textSize="13dp"
+        android:textColor="#000000"
+        android:layout_marginTop="14dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:text="추천순"
+        android:textSize="13dp"
+        android:textColor="#000000"
+        android:id="@+id/fillter2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/fillter"
+        app:layout_goneMarginRight="10dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginRight="25dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:text="최신순"
+        android:textSize="13dp"
+        android:textColor="#000000"
+        android:id="@+id/fillter"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="14dp"
+        android:layout_marginRight="25dp"
+        />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/top_const"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@color/bodyColor">
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
