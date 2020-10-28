@@ -12,7 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.bumptech.glide.Glide;
 import com.rank.rank.R;
+import com.rank.rank.model.Partner;
+import com.rank.rank.model.ProjectDetailModel;
+import com.rank.rank.model.ProjectModel;
 
 import java.util.List;
 
@@ -22,18 +26,42 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
     private int[] detail_icon_id;
     private String[] detail_name_array;
 
-   public DetailAdapter(String detail_name,int[] detail_icon_id,String[] detail_name_array){
+    private List<Partner> partners;
+    private List<ProjectDetailModel> projectModels;
+
+    private Context context;
+
+    private String imgUrl = "https://ssongh.cafe24.com/Agency";
+
+    private int itemCount;
+   public DetailAdapter(Context context, String detail_name, List<Partner> partners){
+        this.context=context;
         this.detail_name=detail_name;
-        this.detail_icon_id=detail_icon_id;
-        this.detail_name_array=detail_name_array;
+        this.partners = partners;
+        itemCount=partners.size();
     }
 
-
+    public DetailAdapter(Context context, String detail_name, List<ProjectDetailModel> projectModels,String st){
+        this.context=context;
+        this.detail_name=detail_name;
+        this.projectModels = projectModels;
+        itemCount=projectModels.size();
+    }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.detail_img.setImageResource(detail_icon_id[position]);
-        holder.detail_txt.setText(detail_name_array[position]);
+
+        if(detail_name.equals("partner")) {
+            Glide.with(context).load(imgUrl + partners.get(position).getBrandImg())
+                    .placeholder(R.drawable.logo_placeholder)
+                    .into(holder.detail_img);
+            holder.detail_txt.setText(partners.get(position).getCompanyName());
+        }else{
+            Glide.with(context).load(imgUrl + projectModels.get(position).getProjectImg())
+                    .placeholder(R.drawable.logo_placeholder)
+                    .into(holder.detail_img);
+            holder.detail_txt.setText(projectModels.get(position).getProjectName());
+        }
     }
 
 
@@ -60,7 +88,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
     }
     @Override
     public int getItemCount() {
-        return detail_name_array.length;
+        return itemCount;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

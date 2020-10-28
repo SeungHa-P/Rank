@@ -1,6 +1,419 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent">
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/detail_const_0"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/detail_const_back"
+        android:paddingLeft="25dp"
+        android:paddingTop="31dp"
+        android:paddingRight="25dp"
+        android:paddingBottom="30dp"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/com_Img"
+            android:layout_width="98dp"
+            android:layout_height="98dp"
+            android:scaleType="fitXY"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:background="@drawable/logo_stroke"
+            android:src="@drawable/logo_01"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
+
+        <TextView
+            android:id="@+id/com_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="14dp"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="1dp"
+            android:text="애드캡슐소프트"
+            android:textColor="#000000"
+            android:textSize="19dp"
+            android:textStyle="normal"
+            app:layout_constraintLeft_toRightOf="@+id/com_Img"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
+        <TextView
+            android:id="@+id/com_name_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="4dp"
+
+            android:text="No.1 Digital Transformation Partner"
+            android:textColor="#50000000"
+            android:textSize="11dp"
+            android:textStyle="normal"
+            app:layout_constraintLeft_toRightOf="@+id/com_Img"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/com_name" />
+
+
+        <ImageView
+            android:id="@+id/img_sticker01"
+            android:layout_width="52dp"
+            android:layout_height="18dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:scaleType="fitXY"
+            app:layout_constraintLeft_toRightOf="@id/com_Img"
+            app:layout_constraintTop_toBottomOf="@id/com_name_detail" />
+
+        <ImageView
+            android:id="@+id/img_sticker02"
+            android:layout_width="84dp"
+            android:layout_height="18dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:scaleType="fitXY"
+            app:layout_constraintLeft_toRightOf="@id/img_sticker01"
+            app:layout_constraintTop_toBottomOf="@id/com_name_detail" />
+
+
+        <TextView
+            style="@style/detail_comp_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="사원수"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/com_Img"
+            android:layout_marginTop="21dp"/>
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="43dp"
+            style="@style/detail_comp_answer"
+            android:text="230명"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/com_Img"
+            android:layout_marginTop="21dp"
+            android:id="@+id/empl_count"
+
+            />
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="10dp"
+            android:src="@drawable/rectangle"
+            app:layout_constraintTop_toTopOf="@id/empl_count"
+            app:layout_constraintBottom_toBottomOf="@+id/empl_count"
+            app:layout_constraintLeft_toRightOf="@+id/empl_count"
+            android:background="#000000FF"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="12dp"
+
+            android:id="@+id/rect_01"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/detail_comp_content"
+            android:layout_marginTop="21dp"
+            app:layout_constraintLeft_toRightOf="@+id/rect_01"
+            android:text="기업규모"
+            app:layout_constraintTop_toBottomOf="@id/com_Img"
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/com_scale"
+            app:layout_constraintTop_toBottomOf="@+id/com_Img"
+            android:layout_marginTop="21dp"
+            app:layout_constraintLeft_toRightOf="@id/rect_01"
+            android:layout_marginLeft="63dp"
+            android:text="중소기업"
+            style="@style/detail_comp_answer"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/empl_count"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="13dp"
+            style="@style/detail_comp_content"
+            android:text="설립일"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/detail_comp_answer"
+            app:layout_constraintTop_toBottomOf="@+id/empl_count"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:id="@+id/make_comp_date"
+            android:layout_marginTop="13dp"
+            android:layout_marginLeft="43dp"
+            android:text="1999.09.03"
+            />
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="10dp"
+            android:src="@drawable/rectangle"
+            app:layout_constraintTop_toTopOf="@id/make_comp_date"
+            app:layout_constraintBottom_toBottomOf="@+id/make_comp_date"
+            app:layout_constraintLeft_toRightOf="@+id/make_comp_date"
+            android:background="#000000FF"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="12dp"
+            android:id="@+id/rect_02"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/detail_comp_content"
+            app:layout_constraintTop_toBottomOf="@id/empl_count"
+            android:layout_marginTop="13dp"
+            app:layout_constraintLeft_toRightOf="@id/rect_02"
+            android:layout_marginLeft="10dp"
+            android:text="주소"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/detail_comp_answer"
+            app:layout_constraintTop_toBottomOf="@+id/empl_count"
+            app:layout_constraintLeft_toRightOf="@id/rect_02"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="39dp"
+            android:layout_marginTop="13dp"
+            android:text="서울 서초구 동광로 12길 84"
+            android:id="@+id/com_address"
+            android:lineSpacingExtra="4sp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/detail_comp_content"
+            android:text="주요사업"
+            app:layout_constraintTop_toBottomOf="@+id/com_address"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="12dp"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/detail_comp_answer"
+            android:id="@+id/com_business"
+            app:layout_constraintTop_toBottomOf="@+id/com_address"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="52dp"
+            android:text="웹 에이전시,IT컨설팅,모바일,홈페이지"
+            />
+
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:src="@drawable/line"
+            app:layout_constraintTop_toBottomOf="@+id/com_business"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="30dp"
+            android:id="@+id/line"
+            android:scaleType="fitXY"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="기업소개"
+            android:textStyle="normal"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="5dp"
+            android:id="@+id/txt_mm"
+            app:layout_constraintTop_toBottomOf="@id/line"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="30dp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="㈜애드캡슐소프트는 1999년에 설립된 웹사이트 및 모바일 구축전문업체로 인터넷이라는 매체를 통한 다양한 서비스를 개발해 오고 있습니다.
+                        협동작업(Collaboration), 의사소통(Communication), 메시징(Messaging) 세가지의 조화 속에서 고객을 성공시키는 철저한 서비스관리와 기술개발을 바탕으로 향후 세계 ddddddddddfsfsdfsdfsadfasdfasdfasdfasdfasdfsadfasdfasdfasfsafsafsafsasadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasf"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:includeFontPadding="false"
+            android:maxLines="6"
+            android:textSize="15dp"
+            android:textColor="#666666"
+            android:lineSpacingExtra="7dp"
+            app:layout_constraintTop_toBottomOf="@+id/txt_mm"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="14dp"
+
+            android:id="@+id/com_content_txt"
+            />
+
+        <ImageView
+            android:id="@+id/gradient"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:background="@drawable/content_gradient"
+            app:layout_constraintBottom_toBottomOf="@+id/com_content_txt"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="@+id/com_content_txt"
+            app:layout_constraintRight_toRightOf="@+id/com_content_txt" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:text="더보기"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:includeFontPadding="false"
+            android:textSize="13dp"
+            android:textColor="#666666"
+            android:gravity="center"
+            android:lineSpacingExtra="7dp"
+            android:id="@+id/btn_alpha"
+            app:layout_constraintTop_toBottomOf="@id/com_content_txt"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="18dp"
+            android:onClick="onAlpha"
+            />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/detail_const_0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/detail_const_back"
+        android:layout_marginTop="15dp"
+
+        android:paddingBottom="30dp"
+        android:id="@+id/detail_const_1"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="파트너"
+            android:id="@+id/txt_mm_2"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:includeFontPadding="false"
+            android:textSize="15dp"
+            android:layout_marginLeft="25dp"
+            android:textColor="#000000"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="30dp"
+            />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="115dp"
+            app:layout_constraintTop_toBottomOf="@id/txt_mm_2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="15dp"
+            android:id="@+id/vp_partner"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/detail_const_1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="15dp"
+        android:id="@+id/detail_const_2"
+
+        android:paddingBottom="30dp"
+        android:background="@drawable/detail_const_back"
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="프로젝트"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:includeFontPadding="false"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="5dp"
+            android:layout_marginLeft="25dp"
+            android:id="@+id/txt_mm_3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="30dp"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/txt_mm_3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:id="@+id/vp_project"
+            android:layout_marginTop="15dp"
+            />
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_const_2"
+        android:background="@color/bodyColor"/>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView></layout>

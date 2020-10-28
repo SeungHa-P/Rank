@@ -32,7 +32,8 @@
                         android:id="@+id/head_text"
                         android:letterSpacing="0.01"
                         android:lineSpacingExtra="8dp"
-
+                        android:fontFamily="@font/notosanscjkkr_medium"
+                        android:includeFontPadding="false"
                         app:layout_constraintLeft_toRightOf="@+id/head_img"
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_marginLeft="10dp"

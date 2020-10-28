@@ -38,7 +38,10 @@ public class FragmentRank extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         binding.rankRecy.setLayoutManager(linearLayoutManager);
         RankAdapter adapter = new RankAdapter();
+
         binding.rankRecy.setAdapter(adapter);
+
+
         View view = binding.getRoot();
 
 

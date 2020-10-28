@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,14 +75,19 @@ public class ProjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof HeaderViewHolder){
             final HeaderViewHolder headerViewHolder = (HeaderViewHolder) holder;
+            String first = "총";
+            String last = "개의 프로젝트";
+            headerViewHolder.projectcount.setText(first+" "+RankSingleTon.getInstance().getProjectModels().getProject().size()+last);
+
+
             String headText = headerViewHolder.projectcount.getText().toString();
             SpannableString spannableString = new SpannableString(headText);
-            String first = "총 ";
-            String last = "개의 프로젝트";
+
 
             int start = headText.indexOf(first)+1;
-            int end = headText.length() - headText.indexOf(last)-1;
-
+            int end = headText.indexOf(last);
+            Log.d("stringline", "총길이 : "+headText.length()
+            +"\n시작점 : "+start+"\n도착점 : "+end);
             spannableString.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             headerViewHolder.projectcount.setText(spannableString);
 

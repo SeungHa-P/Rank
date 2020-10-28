@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 <androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="300dp"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bodyColor"
     android:layout_gravity="end"
+    android:layout_marginLeft="30dp"
     android:id="@+id/drawer">
 
     <TextView
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

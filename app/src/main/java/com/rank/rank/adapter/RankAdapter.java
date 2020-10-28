@@ -1,10 +1,12 @@
 package com.rank.rank.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.nex3z.flowlayout.FlowLayout;
 import com.rank.rank.R;
 import com.rank.rank.RankSingleTon;
 import com.rank.rank.model.MainModel;
@@ -26,6 +29,7 @@ import java.util.List;
 public class RankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private String imgURL = "https://ssongh.cafe24.com/Agency";
     private Context context;
+    private boolean toweny;
 
 //    private int[] imglogo = {R.drawable.logo_01,R.drawable.logo_02,R.drawable.logo_03,R.drawable.logo_04};
 //    private String[] compNmae = {"애드캡슐소프트","디파이","플립커뮤니케이션즈","펜타브리드"};
@@ -34,7 +38,14 @@ public class RankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
 
     private MainModel mainModel = RankSingleTon.getInstance().getMainModel();
+    private ArrayList<Boolean> visibilityList;
 
+    public RankAdapter(){
+        visibilityList=new ArrayList<>();
+        for(int i=0; i<mainModel.getData().size();i++) {
+            visibilityList.add(false);
+        }
+    }
 
 
     @NonNull
@@ -62,18 +73,36 @@ public class RankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     @Override
     public int getItemViewType(int position) {
+     //   String date_string[] = mainModel.getData().get(position).getFounded().split("-");
+
         if(position ==0 ){
             return 0;
-        }else{
-            return 1;
-
+        }else if (position>0) {
+            String date_string[] = mainModel.getData().get(position-1).getFounded().split("-");
+            if (RankSingleTon.getInstance().getToweny(date_string[0], date_string[1], date_string[2])) {
+                toweny = true;
+                return 1;
+            }else{
+                toweny=false;
+                return 2;
+            }
         }
+
+
+        return 2;
     }
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
-        if(holder instanceof ItemViewHolder) {
+        Log.d("RecyclerPosition",""+position);
+        if(holder instanceof HeaderViewHolder){
+            final HeaderViewHolder holder1 = (HeaderViewHolder) holder;
+            holder1.date.setText(RankSingleTon.getInstance().getToday(0)+" 기준");
+        }else if(holder instanceof ItemViewHolder) {
+
            final ItemViewHolder holder1 = (ItemViewHolder) holder;
+           holder1.hashcontanier.removeAllViews();
+
 
            holder1.number.setText(mainModel.getData().get(position-1).getCompanyCd()+"");
 
@@ -81,6 +110,29 @@ public class RankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             +mainModel.getData().get(position-1).getCompanyLogo()).placeholder(R.drawable.logo_placeholder).into(holder1.imageView);
 
             holder1.compName.setText(mainModel.getData().get(position-1).getCompanyName());
+
+            if(toweny){
+                Glide.with(context).load(R.drawable.sticker_01)
+                        .placeholder(R.drawable.logo_placeholder)
+                        .into(holder1.sticker_01);
+                Glide.with(context).load(R.drawable.sticker_02)
+                        .placeholder(R.drawable.logo_placeholder)
+                        .into(holder1.sticker_02);
+            }
+
+
+            View view;
+            for(int i=0; i<mainModel.getData().get(position-1).getMainbussiness().size();i++){
+                view = holder1.inflater.inflate(R.layout.hash_item,null,false);
+                TextView textView = view.findViewById(R.id.hash);
+//                hashname.add(mainModel.getData().get(position).getMainbussiness().get(i));
+                textView.setText("#"+mainModel.getData().get(position-1).getMainbussiness().get(i));
+
+                holder1.hashcontanier.addView(view);
+
+            }
+
+
 
             List<Partner> partner = new ArrayList<Partner>();
             partner=mainModel.getData().get(position-1).getPartner();
@@ -93,16 +145,31 @@ public class RankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                         .into(holder1.imgclient[i]);
             }
 
-            holder1.alphaBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (holder1.alphaItem.getVisibility() == View.GONE) {
-                        holder1.alphaItem.setVisibility(View.VISIBLE);
-                    } else {
-                        holder1.alphaItem.setVisibility(View.GONE);
-                    }
-                }
-            });
+
+           if(visibilityList.get(position-1)){
+               holder1.alphaItem.setVisibility(View.VISIBLE);
+           }else{
+               holder1.alphaItem.setVisibility(View.GONE);
+           }
+
+           holder1.alphaBtn.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   if(visibilityList.get(position-1)){
+                       visibilityList.set(position-1, false);
+                       holder1.alphaItem.setVisibility(View.GONE);
+                   }else{
+                       visibilityList.set(position-1, true);
+                       holder1.alphaItem.setVisibility(View.VISIBLE);
+                   }
+
+               }
+           });
+
+
+
+
+
         }
     }
 
@@ -112,9 +179,10 @@ public class RankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     }
 
     class HeaderViewHolder extends RecyclerView.ViewHolder{
-
+        private TextView date;
         HeaderViewHolder(View headview){
             super(headview);
+            date = headview.findViewById(R.id.text_new);
         }
     }
 
@@ -125,12 +193,13 @@ public class RankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         private ImageView sticker_01;
         private ImageView sticker_02;
         private ConstraintLayout constraintLayout;
-        private int[] hashID = {R.id.hash_1,R.id.hash_2,R.id.hash_3,R.id.hash_4,R.id.hash_5};
         private int[] alphaImgId = {R.id.img_client01,R.id.img_client02,R.id.img_client03};
-        private TextView[] hash = new TextView[hashID.length];
         private ConstraintLayout alphaBtn;
         private ConstraintLayout alphaItem;
         private ImageView[] imgclient=new ImageView[alphaImgId.length];
+        private FlowLayout hashcontanier;
+        private LayoutInflater inflater;
+
         ItemViewHolder(View view){
             super(view);
             alphaBtn=view.findViewById(R.id.alphaBtn);
@@ -141,11 +210,9 @@ public class RankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             compName=view.findViewById(R.id.comp_name);
             number=view.findViewById(R.id.number);
             imageView = view.findViewById(R.id.comp_logo);
+            hashcontanier = view.findViewById(R.id.hash_container);
+            inflater = LayoutInflater.from(context);
 
-
-            for(int i=0;i<hashID.length;i++){
-                hash[i] = view.findViewById(hashID[i]);
-            }
 
             for(int i=0;i<alphaImgId.length;i++){
                 imgclient[i] = view.findViewById(alphaImgId[i]);

@@ -14,6 +14,7 @@ public class RankSingleTon {
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private Calendar todayYear = Calendar.getInstance();
 
+
     private ProjectModel projectModels;
     private MainModel mainModel;
 
@@ -61,5 +62,39 @@ public class RankSingleTon {
 
     public void setProjectModels(ProjectModel projectModels) {
         this.projectModels = projectModels;
+    }
+
+    public String getToday(int choice){
+        String date;
+        switch (choice){
+            case 0:
+                date=todayYear.get(todayYear.YEAR)+"."+(todayYear.get(todayYear.MONTH)+1) + "."+todayYear.get(todayYear.DATE);
+                return date;
+            case 1:
+                date=todayYear.get(todayYear.YEAR)+"-"+(todayYear.get(todayYear.MONTH)+1) + "-"+todayYear.get(todayYear.DATE);
+                return date;
+//            case 2:
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.add(calendar.YEAR,-20);
+//                date=calendar.get(calendar.YEAR)+"-"+(calendar.get(calendar.MONTH)+1) + "-"+calendar.get(calendar.DATE);
+//                return date;
+            default:
+                date=todayYear.get(todayYear.YEAR)+"-"+(todayYear.get(todayYear.MONTH)+1) + "-"+todayYear.get(todayYear.DATE);
+                return date;
+        }
+
+    }
+    public boolean getToweny(String year,String month,String day){
+        Calendar c1 = Calendar.getInstance();
+        Calendar c2 =Calendar.getInstance();
+        c1.set(todayYear.get(todayYear.YEAR)-20,(todayYear.get(todayYear.MONTH))+1,todayYear.get(todayYear.DATE));
+        c2.set(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day));
+        int x = c1.compareTo(c2);
+        if(x>0){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 }
