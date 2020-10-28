@@ -81,7 +81,7 @@ public class FragmentProject extends Fragment {
 
         }else if ("최신순".equals(filter)){
             binding.projectRecy.setLayoutManager(linearLayoutManager);
-            ProjectNewAdapter projectAdapter = new ProjectNewAdapter();
+            ProjectNewAdapter projectAdapter = new ProjectNewAdapter(getContext());
             projectAdapter.setContext(getContext());
             binding.projectRecy.setAdapter(projectAdapter);
         }

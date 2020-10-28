@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -27,16 +28,18 @@ import com.bumptech.glide.request.Request;
 import com.bumptech.glide.request.RequestOptions;
 import com.rank.rank.R;
 import com.rank.rank.RankSingleTon;
+import com.rank.rank.listener.OnItemClick;
 import com.rank.rank.model.ProjectModel;
 
 public class ProjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private String imgUrl = "https://ssongh.cafe24.com/Agency";
-
+    public OnItemClick click;
     public Context context;
     private ProjectModel projectModel = RankSingleTon.getInstance().getProjectModels();
     public ProjectAdapter(Context context){
         this.context=context;
+
 
     }
 
@@ -91,6 +94,19 @@ public class ProjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             spannableString.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             headerViewHolder.projectcount.setText(spannableString);
 
+            headerViewHolder.filter1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context,"최신순",Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            headerViewHolder.filter2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context,"추천순",Toast.LENGTH_SHORT).show();
+                }
+            });
 
 
         }
@@ -125,11 +141,14 @@ public class ProjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     class HeaderViewHolder extends RecyclerView.ViewHolder{
         public TextView projectcount;
+        private TextView filter1;
+        private TextView filter2;
         HeaderViewHolder(View view){
             super(view);
 
             projectcount = view.findViewById(R.id.project_count_txt);
-
+            filter1=view.findViewById(R.id.fillter);
+            filter2=view.findViewById(R.id.fillter2);
 
 
         }
