@@ -16,6 +16,7 @@ import com.rank.rank.FmRankModel;
 import com.rank.rank.R;
 import com.rank.rank.adapter.RankAdapter;
 import com.rank.rank.databinding.FragmentRankBinding;
+import com.rank.rank.listener.OnItemClick;
 
 public class FragmentRank extends Fragment {
     private FragmentRankBinding binding;
@@ -51,4 +52,6 @@ public class FragmentRank extends Fragment {
 
         return view;
     }
+
+
 }

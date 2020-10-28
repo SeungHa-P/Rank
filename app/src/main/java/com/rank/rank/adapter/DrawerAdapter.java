@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private   Intent intent;
-
+    private boolean toweny;
     private String imgURL = "https://ssongh.cafe24.com/Agency";
 
     private OnItemClick onItemClick;
@@ -57,7 +57,16 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemViewType(int position) {
-        return 1;
+          String date_string[] = RankSingleTon.getInstance().getMainModel().getData().get(position).getFounded().split("-");
+        if (RankSingleTon.getInstance().getToweny(date_string[0], date_string[1], date_string[2])) {
+            toweny = true;
+            return 0;
+        }else{
+            toweny=false;
+            return 1;
+        }
+
+
     }
 
     @Override
@@ -70,6 +79,15 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     .placeholder(R.drawable.logo_placeholder)
                     .into(viewHolder.imageView);
 
+
+            if(toweny){
+                Glide.with(context).load(R.drawable.sticker_01)
+                        .placeholder(R.drawable.logo_placeholder)
+                        .into(viewHolder.sticker_01);
+                Glide.with(context).load(R.drawable.sticker_02)
+                        .placeholder(R.drawable.logo_placeholder)
+                        .into(viewHolder.sticker_02);
+            }
 
                 viewHolder.compName.setText(
                         RankSingleTon.getInstance().getMainModel().getData().get(position)
@@ -172,5 +190,14 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         }
     }
+
+    public void setClear(){
+
+        for(int i=0; i<RankSingleTon.getInstance().getMainModel().getData().size();i++) {
+            visibilityList.set(i,false);
+        }
+        notifyDataSetChanged();
+    }
+
 }
 

@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
         private MainViewModel mvM;
 
         private boolean drawerFlag = false;
-
+    DrawerAdapter adapter;
         private TextView[] title;
         private int titleposition;
         private View constraintLayout;
@@ -152,6 +152,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
 
             @Override
             public void onDrawerClosed(@NonNull View drawerView) {
+                adapter.setClear();
+
                 drawerFlag=false;
             }
 
@@ -164,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         binding.incdraw.rankRecy.setLayoutManager(linearLayoutManager);
-        DrawerAdapter adapter = new DrawerAdapter(this,this);
+        adapter = new DrawerAdapter(this,this);
 
         binding.incdraw.rankRecy.setAdapter(adapter);
 
@@ -179,7 +181,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
     }
 
     public void drawerClose(){
-
             binding.drwerlayout.closeDrawer(binding.incdraw.drawer);
             drawerFlag=false;
 
@@ -188,6 +189,11 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
     @Override
     public void onClick() {
         drawerClose();
+    }
+
+    @Override
+    public void onClick(String filter) {
+
     }
 
     public void title(View view){
