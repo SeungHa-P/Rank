@@ -37,12 +37,12 @@ public class ProjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public OnItemClick click;
     public Context context;
     private ProjectModel projectModel = RankSingleTon.getInstance().getProjectModels();
-    public ProjectAdapter(Context context){
-        this.context=context;
 
+    public ProjectAdapter(Context context, OnItemClick click) {
+        this.context = context;
+        this.click = click;
 
     }
-
 
 
     @NonNull
@@ -50,13 +50,13 @@ public class ProjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         RecyclerView.ViewHolder viewHolder;
-        if(viewType == 0) {
-            view= LayoutInflater.from(parent.getContext()).inflate(R.layout.project_list_header,parent,false);
+        if (viewType == 0) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.project_list_header, parent, false);
             viewHolder = new HeaderViewHolder(view);
-        }else if (viewType ==1){
+        } else if (viewType == 1) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.project_grid_item, parent, false);
             viewHolder = new ViewHolder(view);
-        }else{
+        } else {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.project_grid_item, parent, false);
             viewHolder = new ViewHolder(view);
         }
@@ -66,9 +66,9 @@ public class ProjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemViewType(int position) {
-        if(position == 0){
+        if (position == 0) {
             return 0;
-        }else{
+        } else {
 
             return 1;
         }
@@ -76,50 +76,52 @@ public class ProjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof HeaderViewHolder){
+        if (holder instanceof HeaderViewHolder) {
             final HeaderViewHolder headerViewHolder = (HeaderViewHolder) holder;
             String first = "총";
             String last = "개의 프로젝트";
-            headerViewHolder.projectcount.setText(first+" "+RankSingleTon.getInstance().getProjectModels().getProject().size()+last);
+            headerViewHolder.projectcount.setText(first + " " + RankSingleTon.getInstance().getProjectModels().getProject().size() + last);
 
 
             String headText = headerViewHolder.projectcount.getText().toString();
             SpannableString spannableString = new SpannableString(headText);
 
 
-            int start = headText.indexOf(first)+1;
+            int start = headText.indexOf(first) + 1;
             int end = headText.indexOf(last);
-            Log.d("stringline", "총길이 : "+headText.length()
-            +"\n시작점 : "+start+"\n도착점 : "+end);
+            Log.d("stringline", "총길이 : " + headText.length()
+                    + "\n시작점 : " + start + "\n도착점 : " + end);
             spannableString.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             headerViewHolder.projectcount.setText(spannableString);
 
             headerViewHolder.filter1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context,"최신순",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "최신순", Toast.LENGTH_SHORT).show();
+                    click.onClick("최신순");
                 }
             });
 
             headerViewHolder.filter2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context,"추천순",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "추천순", Toast.LENGTH_SHORT).show();
+                    click.onClick("추천순");
                 }
             });
 
 
         }
-        if(holder instanceof ViewHolder) {
+        if (holder instanceof ViewHolder) {
             final ViewHolder viewHolder = (ViewHolder) holder;
             Glide.with(context)
-                    .load(imgUrl+projectModel.getProject().get(position-1).getProjectImg())
-                    .apply(new RequestOptions().transform(new CenterInside(),new GranularRoundedCorners((int)(3*RankSingleTon.getInstance().getDensity()),(int)(3*RankSingleTon.getInstance().getDensity()),0,0)))
+                    .load(imgUrl + projectModel.getProject().get(position - 1).getProjectImg())
+                    .apply(new RequestOptions().transform(new CenterInside(), new GranularRoundedCorners((int) (3 * RankSingleTon.getInstance().getDensity()), (int) (3 * RankSingleTon.getInstance().getDensity()), 0, 0)))
 //                    .apply(new RequestOptions().transform(new RoundedCorners((int)(3*RankSingleTon.getInstance().getDensity())))) //전체 코
                     .placeholder(R.drawable.logo_placeholder)
                     .into(viewHolder.project_img_view);
 
-            viewHolder.project_name_text.setText(projectModel.getProject().get(position -1).getProjectName());
+            viewHolder.project_name_text.setText(projectModel.getProject().get(position - 1).getProjectName());
 //            int companyCd = projectModel.getProject().get(position-1).getCompanyCd();
 //            for(int i=0;i<RankSingleTon.getInstance().getMainModel().getData().size();i++){
 //                if(RankSingleTon.getInstance().getMainModel().getData().get(i).getCompanyCd() == companyCd){
@@ -129,7 +131,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //                    continue;
 //                }
 //            }
-            viewHolder.project_day_text.setText(RankSingleTon.getInstance().getProjectModels().getProject().get(position-1).getDate());
+            viewHolder.project_day_text.setText(RankSingleTon.getInstance().getProjectModels().getProject().get(position - 1).getDate());
         }
 
     }
@@ -139,16 +141,17 @@ public class ProjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return projectModel.getProject().size() + 1;
     }
 
-    class HeaderViewHolder extends RecyclerView.ViewHolder{
+    class HeaderViewHolder extends RecyclerView.ViewHolder {
         public TextView projectcount;
         private TextView filter1;
         private TextView filter2;
-        HeaderViewHolder(View view){
+
+        HeaderViewHolder(View view) {
             super(view);
 
             projectcount = view.findViewById(R.id.project_count_txt);
-            filter1=view.findViewById(R.id.fillter);
-            filter2=view.findViewById(R.id.fillter2);
+            filter1 = view.findViewById(R.id.fillter);
+            filter2 = view.findViewById(R.id.fillter2);
 
 
         }
@@ -156,20 +159,18 @@ public class ProjectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
 
-
-    class ViewHolder extends RecyclerView.ViewHolder{
-
+    class ViewHolder extends RecyclerView.ViewHolder {
 
 
         public ImageView project_img_view;
         public TextView project_name_text;
         public TextView project_day_text;
-        ViewHolder(View view){
-            super(view);
-            project_img_view=view.findViewById(R.id.project_Img);
-            project_name_text=view.findViewById(R.id.project_Name);
-            project_day_text=view.findViewById(R.id.project_day);
 
+        ViewHolder(View view) {
+            super(view);
+            project_img_view = view.findViewById(R.id.project_Img);
+            project_name_text = view.findViewById(R.id.project_Name);
+            project_day_text = view.findViewById(R.id.project_day);
 
 
         }

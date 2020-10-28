@@ -19,10 +19,12 @@ import com.rank.rank.adapter.GridItemDeco;
 import com.rank.rank.adapter.ProjectAdapter;
 import com.rank.rank.adapter.ProjectNewAdapter;
 import com.rank.rank.databinding.FragmentProjectBinding;
+import com.rank.rank.listener.OnItemClick;
 
-public class FragmentProject extends Fragment {
+public class FragmentProject extends Fragment implements OnItemClick {
     private FragmentProjectBinding binding;
-
+    private ProjectAdapter projectAdapter;
+    private ProjectNewAdapter projectNewAdapter;
     private GridLayoutManager gridLayoutManager;
     private LinearLayoutManager linearLayoutManager;
     public FragmentProject(){
@@ -36,8 +38,30 @@ public class FragmentProject extends Fragment {
         View view=binding.getRoot();
 
         gridLayoutManager = new GridLayoutManager(getContext(),2);
+        projectAdapter = new ProjectAdapter(getContext(),this);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                int viewType =projectAdapter.getItemViewType(position);
+                if(viewType == 0){
+                    return 2;
+                }
+
+                return 1;
+            }
+        });
+        binding.projectRecy.setLayoutManager(gridLayoutManager);
+        binding.projectRecy.addItemDecoration(new GridItemDeco(25,7, RankSingleTon.getInstance().getDivicEdpi(),RankSingleTon.getInstance().getDensity(),0));
+        binding.projectRecy.setAdapter(projectAdapter);
+
+
         linearLayoutManager = new LinearLayoutManager(getContext());
-        contextAdapter("추천순");
+        projectNewAdapter = new ProjectNewAdapter(getContext(),this);
+        binding.projectRecynew.addItemDecoration(new GridItemDeco(25,7, RankSingleTon.getInstance().getDivicEdpi(),RankSingleTon.getInstance().getDensity(),1));
+        binding.projectRecynew.setLayoutManager(linearLayoutManager);
+        binding.projectRecynew.setAdapter(projectNewAdapter);
+
+        contextAdapter("최신순");
 
 
 
@@ -61,31 +85,23 @@ public class FragmentProject extends Fragment {
     public void contextAdapter(String filter){
         if("추천순".equals(filter)) {
 
-            binding.projectRecy.setLayoutManager(gridLayoutManager);
-
-            ProjectAdapter projectAdapter = new ProjectAdapter(getContext());
-            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(int position) {
-                    int viewType =projectAdapter.getItemViewType(position);
-                           if(viewType == 0){
-                                return 2;
-                           }
-
-                           return 1;
-                }
-            });
-
-            binding.projectRecy.addItemDecoration(new GridItemDeco(25,7, RankSingleTon.getInstance().getDivicEdpi(),RankSingleTon.getInstance().getDensity()));
-            binding.projectRecy.setAdapter(projectAdapter);
+         binding.projectRecy.setVisibility(View.VISIBLE);
+         binding.projectRecynew.setVisibility(View.GONE);
 
         }else if ("최신순".equals(filter)){
-            binding.projectRecy.setLayoutManager(linearLayoutManager);
-            ProjectNewAdapter projectAdapter = new ProjectNewAdapter(getContext());
-            projectAdapter.setContext(getContext());
-            binding.projectRecy.setAdapter(projectAdapter);
+            binding.projectRecynew.setVisibility(View.VISIBLE);
+            binding.projectRecy.setVisibility(View.GONE);
         }
 
     }
 
+    @Override
+    public void onClick() {
+
+    }
+
+    @Override
+    public void onClick(String filter) {
+        contextAdapter(filter);
+    }
 }

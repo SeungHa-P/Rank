@@ -34,29 +34,30 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
     private String imgUrl = "https://ssongh.cafe24.com/Agency";
 
     private int itemCount;
-   public DetailAdapter(Context context, String detail_name, List<Partner> partners){
-        this.context=context;
-        this.detail_name=detail_name;
+
+    public DetailAdapter(Context context, String detail_name, List<Partner> partners) {
+        this.context = context;
+        this.detail_name = detail_name;
         this.partners = partners;
-        itemCount=partners.size();
+        itemCount = partners.size();
     }
 
-    public DetailAdapter(Context context, String detail_name, List<ProjectDetailModel> projectModels,String st){
-        this.context=context;
-        this.detail_name=detail_name;
+    public DetailAdapter(Context context, String detail_name, List<ProjectDetailModel> projectModels, String st) {
+        this.context = context;
+        this.detail_name = detail_name;
         this.projectModels = projectModels;
-        itemCount=projectModels.size();
+        itemCount = projectModels.size();
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        if(detail_name.equals("partner")) {
+        if (detail_name.equals("partner")) {
             Glide.with(context).load(imgUrl + partners.get(position).getBrandImg())
                     .placeholder(R.drawable.logo_placeholder)
                     .into(holder.detail_img);
             holder.detail_txt.setText(partners.get(position).getCompanyName());
-        }else{
+        } else {
             Glide.with(context).load(imgUrl + projectModels.get(position).getProjectImg())
                     .placeholder(R.drawable.logo_placeholder)
                     .into(holder.detail_img);
@@ -69,34 +70,36 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        if (viewType==0){
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.detail_view_item,parent,false);
+        if (viewType == 0) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.detail_view_item, parent, false);
 
-        }else {
+        } else {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.detail_view_project, parent, false);
 
         }
-      return new ViewHolder(view);
+        return new ViewHolder(view);
     }
+
     @Override
     public int getItemViewType(int position) {
-        if(detail_name.equals("partner")){
+        if (detail_name.equals("partner")) {
             return 0;
-        }else {
+        } else {
             return 1;
         }
     }
+
     @Override
     public int getItemCount() {
         return itemCount;
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView detail_img;
         private TextView detail_txt;
 
 
-        ViewHolder(View view){
+        ViewHolder(View view) {
             super(view);
             detail_img = view.findViewById(R.id.detail_vp_icon);
             detail_txt = view.findViewById(R.id.detail_vp_name);

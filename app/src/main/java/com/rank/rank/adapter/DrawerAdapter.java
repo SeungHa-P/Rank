@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private   Intent intent;
+    private Intent intent;
     private boolean toweny;
     private String imgURL = "https://ssongh.cafe24.com/Agency";
 
@@ -57,12 +57,12 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemViewType(int position) {
-          String date_string[] = RankSingleTon.getInstance().getMainModel().getData().get(position).getFounded().split("-");
+        String date_string[] = RankSingleTon.getInstance().getMainModel().getData().get(position).getFounded().split("-");
         if (RankSingleTon.getInstance().getToweny(date_string[0], date_string[1], date_string[2])) {
             toweny = true;
             return 0;
-        }else{
-            toweny=false;
+        } else {
+            toweny = false;
             return 1;
         }
 
@@ -71,16 +71,16 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
-        if(holder instanceof ItemViewHolder){
-                final ItemViewHolder viewHolder = (ItemViewHolder) holder;
+        if (holder instanceof ItemViewHolder) {
+            final ItemViewHolder viewHolder = (ItemViewHolder) holder;
 
-            Glide.with(context).load(imgURL+RankSingleTon.getInstance().getMainModel().getData()
-                .get(position).getCompanyLogo())
+            Glide.with(context).load(imgURL + RankSingleTon.getInstance().getMainModel().getData()
+                    .get(position).getCompanyLogo())
                     .placeholder(R.drawable.logo_placeholder)
                     .into(viewHolder.imageView);
 
 
-            if(toweny){
+            if (toweny) {
                 Glide.with(context).load(R.drawable.sticker_01)
                         .placeholder(R.drawable.logo_placeholder)
                         .into(viewHolder.sticker_01);
@@ -89,32 +89,32 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         .into(viewHolder.sticker_02);
             }
 
-                viewHolder.compName.setText(
-                        RankSingleTon.getInstance().getMainModel().getData().get(position)
-                        .getCompanyName());
+            viewHolder.compName.setText(
+                    RankSingleTon.getInstance().getMainModel().getData().get(position)
+                            .getCompanyName());
 
 
-                for(int i=0;i<RankSingleTon.getInstance().getMainModel().getData().get(position).getPartner().size();i++){
-                    Glide.with(context).load(imgURL+RankSingleTon.getInstance().getMainModel().getData().get(position)
-                    .getPartner().get(i).getBrandImg())
-                            .placeholder(R.drawable.logo_placeholder)
-                            .into(viewHolder.partner[i]);
-                }
+            for (int i = 0; i < RankSingleTon.getInstance().getMainModel().getData().get(position).getPartner().size(); i++) {
+                Glide.with(context).load(imgURL + RankSingleTon.getInstance().getMainModel().getData().get(position)
+                        .getPartner().get(i).getBrandImg())
+                        .placeholder(R.drawable.logo_placeholder)
+                        .into(viewHolder.partner[i]);
+            }
 
 
-            if(visibilityList.get(position)){
+            if (visibilityList.get(position)) {
                 viewHolder.alphaItem.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 viewHolder.alphaItem.setVisibility(View.GONE);
             }
 
             viewHolder.alphaBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(visibilityList.get(position)){
+                    if (visibilityList.get(position)) {
                         visibilityList.set(position, false);
                         viewHolder.alphaItem.setVisibility(View.GONE);
-                    }else{
+                    } else {
                         visibilityList.set(position, true);
                         viewHolder.alphaItem.setVisibility(View.VISIBLE);
                     }
@@ -123,22 +123,18 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             });
 
 
-
-
-
             viewHolder.constraintLayout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        onItemClick.onClick();
-                        intent = new Intent(context,DetailActivity.class);
-                        intent.putExtra("position",position);
+                @Override
+                public void onClick(View v) {
+                    onItemClick.onClick();
+                    intent = new Intent(context, DetailActivity.class);
+                    intent.putExtra("position", position);
 
-                        context.startActivity(intent);
-                    }
-                });
+                    context.startActivity(intent);
+                }
+            });
 
         }
-
 
 
     }
@@ -148,14 +144,15 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return RankSingleTon.getInstance().getMainModel().getData().size();
     }
 
-    public DrawerAdapter(Context context, OnItemClick listner){
+    public DrawerAdapter(Context context, OnItemClick listner) {
         this.context = context;
         onItemClick = listner;
-        visibilityList=new ArrayList<>();
-        for(int i=0; i<RankSingleTon.getInstance().getMainModel().getData().size();i++) {
+        visibilityList = new ArrayList<>();
+        for (int i = 0; i < RankSingleTon.getInstance().getMainModel().getData().size(); i++) {
             visibilityList.add(false);
         }
     }
+
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
         private TextView compName;
@@ -168,7 +165,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         private ConstraintLayout alphaBtn;
         private ConstraintLayout alphaItem;
 
-        private int[] partnerId = {R.id.img_client01,R.id.img_client02,R.id.img_client03};
+        private int[] partnerId = {R.id.img_client01, R.id.img_client02, R.id.img_client03};
         private ImageView[] partner = new ImageView[partnerId.length];
 
         ItemViewHolder(View view) {
@@ -184,17 +181,17 @@ public class DrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             for (int i = 0; i < hashID.length; i++) {
                 hash[i] = view.findViewById(hashID[i]);
             }
-            for (int i=0;i<partnerId.length;i++){
+            for (int i = 0; i < partnerId.length; i++) {
                 partner[i] = view.findViewById(partnerId[i]);
             }
 
         }
     }
 
-    public void setClear(){
+    public void setClear() {
 
-        for(int i=0; i<RankSingleTon.getInstance().getMainModel().getData().size();i++) {
-            visibilityList.set(i,false);
+        for (int i = 0; i < RankSingleTon.getInstance().getMainModel().getData().size(); i++) {
+            visibilityList.set(i, false);
         }
         notifyDataSetChanged();
     }

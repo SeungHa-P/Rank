@@ -14,10 +14,10 @@ public class DetailItemDeco extends RecyclerView.ItemDecoration {
     private int itemMargin;
 
 
-    public DetailItemDeco(Context context, int fistmarginDp,int itemmarginDp){
+    public DetailItemDeco(Context context, int fistmarginDp, int itemmarginDp) {
 
-        firstMargin=(int)(fistmarginDp * RankSingleTon.getInstance().getDensity());
-        itemMargin=(int)(itemmarginDp * RankSingleTon.getInstance().getDensity());
+        firstMargin = (int) (fistmarginDp * RankSingleTon.getInstance().getDensity());
+        itemMargin = (int) (itemmarginDp * RankSingleTon.getInstance().getDensity());
     }
 
 
@@ -29,12 +29,12 @@ public class DetailItemDeco extends RecyclerView.ItemDecoration {
         int itemCount = state.getItemCount();
 
 
-        if (position == 0){
+        if (position == 0) {
             outRect.left = firstMargin;
             outRect.right = itemMargin;
 
-        }else{
-            outRect.right= itemMargin;
+        } else {
+            outRect.right = itemMargin;
         }
 
     }

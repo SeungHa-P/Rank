@@ -18,19 +18,20 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.rank.rank.R;
 import com.rank.rank.RankSingleTon;
 import com.rank.rank.listener.OnItemClick;
 
-public class ProjectNewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class ProjectNewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
 
     private OnItemClick click;
 
 
-    public ProjectNewAdapter(Context context){
-        this.context=context;
-
+    public ProjectNewAdapter(Context context, OnItemClick click) {
+        this.context = context;
+        this.click = click;
     }
 
 //
@@ -52,16 +53,21 @@ public class ProjectNewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 //    private int[] pentaimg={R.drawable.project_07,R.drawable.project_08};
 //    private String[] pentaday={"19.08.05","19.07.25"};
 
-    class HeadViewHolder extends RecyclerView.ViewHolder{
+    class HeadViewHolder extends RecyclerView.ViewHolder {
+
+
+        private String imgURL = "https://ssongh.cafe24.com/Agency";
         private TextView filter1;
         private TextView filter2;
         public TextView projectcount;
-        HeadViewHolder(View view){
+
+
+        HeadViewHolder(View view) {
             super(view);
 
             projectcount = view.findViewById(R.id.project_count_txt);
-            filter1=view.findViewById(R.id.fillter);
-            filter2=view.findViewById(R.id.fillter2);
+            filter1 = view.findViewById(R.id.fillter);
+            filter2 = view.findViewById(R.id.fillter2);
 
 
         }
@@ -69,31 +75,31 @@ public class ProjectNewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
-    class ItemViewHolder extends RecyclerView.ViewHolder{
+    class ItemViewHolder extends RecyclerView.ViewHolder {
         private TextView co_name;
         private ImageView head_img;
         private RecyclerView recyclerView;
         private GridLayoutManager gridLayoutManager;
-        private ProjectNewSubAdapter projectNewSubAdapter;
         private ConstraintLayout constraintLayout;
+
         ItemViewHolder(View view) {
-        super(view);
+            super(view);
             constraintLayout = view.findViewById(R.id.list_head);
-            co_name=view.findViewById(R.id.head_text);
+            co_name = view.findViewById(R.id.head_text);
             head_img = view.findViewById(R.id.head_img);
             recyclerView = view.findViewById(R.id.project_new_recy);
-            gridLayoutManager =new GridLayoutManager(context,2);
+            gridLayoutManager = new GridLayoutManager(context, 2);
             recyclerView.setLayoutManager(gridLayoutManager);
-            projectNewSubAdapter = new ProjectNewSubAdapter();
 
+            recyclerView.addItemDecoration(new GridItemDeco(0, 7, RankSingleTon.getInstance().getDivicEdpi(), RankSingleTon.getInstance().getDensity(), 2));
 
         }
 
     }
-    public void setContext(Context context){
+
+    public void setContext(Context context) {
         this.context = context;
     }
-
 
 
     @NonNull
@@ -101,11 +107,11 @@ public class ProjectNewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         RecyclerView.ViewHolder viewHolder;
-        if (viewType == 0){
-            view= LayoutInflater.from(parent.getContext()).inflate(R.layout.project_list_header,parent,false);
+        if (viewType == 0) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.project_list_header, parent, false);
             viewHolder = new HeadViewHolder(view);
-        }else{
-            view= LayoutInflater.from(parent.getContext()).inflate(R.layout.project_new_item,parent,false);
+        } else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.project_new_item, parent, false);
             viewHolder = new ItemViewHolder(view);
         }
 
@@ -115,38 +121,66 @@ public class ProjectNewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
-        if(holder instanceof HeadViewHolder){
+        if (holder instanceof HeadViewHolder) {
             final HeadViewHolder vh = (HeadViewHolder) holder;
             String first = "총";
             String last = "개의 프로젝트";
-            vh.projectcount.setText(first+" "+RankSingleTon.getInstance().getProjectModels().getProject().size()+last);
+            vh.projectcount.setText(first + " " + RankSingleTon.getInstance().getProjectModels().getProject().size() + last);
 
 
             String headText = vh.projectcount.getText().toString();
             SpannableString spannableString = new SpannableString(headText);
 
 
-            int start = headText.indexOf(first)+1;
+            int start = headText.indexOf(first) + 1;
             int end = headText.indexOf(last);
-            Log.d("stringline", "총길이 : "+headText.length()
-                    +"\n시작점 : "+start+"\n도착점 : "+end);
+            Log.d("stringline", "총길이 : " + headText.length()
+                    + "\n시작점 : " + start + "\n도착점 : " + end);
             spannableString.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             vh.projectcount.setText(spannableString);
 
             vh.filter1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context,"최신순",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "최신순", Toast.LENGTH_SHORT).show();
+                    click.onClick("최신순");
                 }
             });
 
             vh.filter2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context,"추천순",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "추천순", Toast.LENGTH_SHORT).show();
+                    click.onClick("추천순");
                 }
             });
 
+        } else if (holder instanceof ItemViewHolder) {
+            final ItemViewHolder vh = (ItemViewHolder) holder;
+            String imgURL = "https://ssongh.cafe24.com/Agency";
+            Glide.with(context).load(imgURL + RankSingleTon.getInstance().getMainModel()
+                    .getData().get(position - 1).getCompanyLogo()).into(vh.head_img);
+
+            vh.co_name.setText(RankSingleTon.getInstance().getMainModel().getData()
+                    .get(position - 1).getCompanyName());
+
+            ProjectNewSubAdapter projectNewSubAdapter = new ProjectNewSubAdapter(context,
+                    RankSingleTon.getInstance().getMainModel().getData().get(position - 1).getCompanyCd()
+            );
+
+
+            vh.recyclerView.setAdapter(projectNewSubAdapter);
+
+            vh.constraintLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (vh.recyclerView.getVisibility() == View.GONE) {
+                        vh.recyclerView.setVisibility(View.VISIBLE);
+                    } else {
+                        vh.recyclerView.setVisibility(View.GONE);
+                    }
+                }
+            });
         }
 
 //        holder.head_img.setImageResource(head_img_id[position]);
@@ -178,15 +212,15 @@ public class ProjectNewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemCount() {
-        return RankSingleTon.getInstance().getMainModel().getData().size()+1;
+        return RankSingleTon.getInstance().getMainModel().getData().size() + 1;
     }
 
 
     @Override
     public int getItemViewType(int position) {
-        if(position ==0){
+        if (position == 0) {
             return 0;
-        }else{
+        } else {
             return 1;
         }
     }

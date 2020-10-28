@@ -20,7 +20,7 @@ public class MainAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        switch (position){
+        switch (position) {
             case 0:
                 FragmentRank fragmentRank = new FragmentRank();
                 return fragmentRank;
@@ -28,7 +28,7 @@ public class MainAdapter extends FragmentPagerAdapter {
                 FragmentProject fragmentProject = new FragmentProject();
                 return fragmentProject;
             case 2:
-                FragmentCustom fragmentCustom =new FragmentCustom();
+                FragmentCustom fragmentCustom = new FragmentCustom();
                 return fragmentCustom;
             default:
                 return null;
@@ -40,7 +40,6 @@ public class MainAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 3;
     }
-
 
 
 }
