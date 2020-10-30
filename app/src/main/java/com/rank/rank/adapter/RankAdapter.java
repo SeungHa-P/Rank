@@ -1,6 +1,7 @@
 package com.rank.rank.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.nex3z.flowlayout.FlowLayout;
+import com.rank.rank.DetailActivity;
 import com.rank.rank.R;
 import com.rank.rank.RankSingleTon;
+import com.rank.rank.listener.OnItemClick;
 import com.rank.rank.model.MainModel;
 import com.rank.rank.model.Partner;
 
@@ -36,7 +39,8 @@ public class RankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 //    private String[] string_1 = {"#웹 에이전시","#IT컨설팅","#홈페이지","#모바일","#공기업전문"};
 //    private String[] string_2 = {"#웹 에이전시","#IT컨설팅","#홈페이지","#모바일","#시스템운영"};
 
-
+    private OnItemClick onItemClick;
+    private Intent intent;
     private MainModel mainModel = RankSingleTon.getInstance().getMainModel();
     private ArrayList<Boolean> visibilityList;
 
@@ -162,6 +166,17 @@ public class RankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         holder1.alphaItem.setVisibility(View.VISIBLE);
                     }
 
+                }
+            });
+
+            holder1.constraintLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    intent = new Intent(context, DetailActivity.class);
+                    intent.putExtra("position", position-1);
+
+                    context.startActivity(intent);
                 }
             });
 
