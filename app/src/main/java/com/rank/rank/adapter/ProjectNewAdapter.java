@@ -142,7 +142,7 @@ public class ProjectNewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.filter1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "최신순", Toast.LENGTH_SHORT).show();
+
                     click.onClick("최신순");
                 }
             });
@@ -150,7 +150,7 @@ public class ProjectNewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.filter2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "추천순", Toast.LENGTH_SHORT).show();
+
                     click.onClick("추천순");
                 }
             });

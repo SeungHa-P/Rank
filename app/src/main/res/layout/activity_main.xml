@@ -112,15 +112,15 @@
                     />
 
                 <ImageButton
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:layout_marginRight="19dp"
                     android:id="@+id/search_btn"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="19dp"
                     android:background="#FFFFFFFF"
-
-                    android:src="@drawable/search_icon"/>
+                    android:src="@drawable/baseline_reorder_black_18dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintRight_toRightOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

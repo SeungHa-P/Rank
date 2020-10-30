@@ -1,8 +1,15 @@
 package com.rank.rank;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.util.Base64;
+import android.util.Log;
+
 import com.rank.rank.model.MainModel;
 import com.rank.rank.model.ProjectModel;
 
+import java.security.MessageDigest;
+import java.security.Signature;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -97,4 +104,7 @@ public class RankSingleTon {
         }
 
     }
+
+
+
 }
