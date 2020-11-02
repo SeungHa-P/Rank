@@ -298,10 +298,16 @@ public class MainActivity extends AppCompatActivity implements OnItemClick, Logi
 
                         });
                 LoginManager.getInstance().logOut();
-                if(loginPage.equals("naver")) {
-                    oAuthLogin.logout(context);
-                }else if(loginPage.equals("google")){
-                    mAuth.signOut();
+                try {
+                    if (loginPage.equals("naver")) {
+                        oAuthLogin.logout(context);
+                    } else if (loginPage.equals("google")) {
+                        mAuth.signOut();
+                    } else if (loginPage.equals("")) {
+
+                    }
+                }catch (NullPointerException e){
+
                 }
 
             }

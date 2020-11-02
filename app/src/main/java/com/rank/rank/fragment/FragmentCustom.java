@@ -1,5 +1,6 @@
 package com.rank.rank.fragment;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -162,7 +163,7 @@ public class FragmentCustom extends Fragment {
 //                datePickerDialog.show();
                 btnNumber=0;
 
-                new DatePickerDialog(getContext(), myDatePicker,
+                new DatePickerDialog(getContext(), AlertDialog.THEME_HOLO_LIGHT,listener,
                         myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
 
 
@@ -177,7 +178,7 @@ public class FragmentCustom extends Fragment {
 //                Intent intent = new Intent(getContext(),DatePopUpActivity.class);
 //                startActivityForResult(intent,2);
                 btnNumber=1;
-                new DatePickerDialog(getContext(), myDatePicker,
+                new DatePickerDialog(getContext(), AlertDialog.THEME_HOLO_LIGHT,listener,
                         myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
 
             }
@@ -268,7 +269,7 @@ public class FragmentCustom extends Fragment {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Toast.makeText(getContext(), year + "년" + monthOfYear + "월" + dayOfMonth +"일", Toast.LENGTH_SHORT).show();
-
+                updateLabel(btnNumber);
 
             }
         };
